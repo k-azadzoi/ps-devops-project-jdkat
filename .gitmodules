@@ -1,0 +1,6 @@
+[submodule "docker-elks"]
+	path = docker-elks
+	url = https://github.com/k-charette/docker-elk.git
+[submodule "docker-elk"]
+	path = docker-elk
+	url = https://github.com/k-charette/docker-elk.git
