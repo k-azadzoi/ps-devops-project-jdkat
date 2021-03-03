@@ -1,0 +1,41 @@
+---
+- hosts: kube1
+  become: true
+
+  vars_files:
+    - vars/main.yml
+
+  pre_tasks:
+    - name: Ensure k8s module dependencies are installed.
+      pip:
+        name: openshift==0.11.2
+        state: present
+
+  tasks:
+    - name: Create jdkat resources and wait until they are Ready.
+      k8s:
+        state: present
+        definition: "{{ lookup('file', 'files/' + item) }}"
+        wait: true
+      with_items:
+        - jdkat-deployment.yml
+        - jdkat-service.yml
+
+    - name: Get jdkat service details.
+      k8s_info:
+        kind: Service
+        name: jdkat
+        namespace: default
+      register: svc
+
+    - name: Set the service NodePort as a variable.
+      set_fact:
+        port: "{{ svc['resources'][0]['spec']['ports'][0]['nodePort'] }}"
+
+    - name: Test a request to the service.
+      uri:
+        url: http://{{ ansible_host }}:{{ port }}/
+
+    - name: Print the URL for jdkat.
+      debug:
+        msg: http://{{ ansible_host }}:{{ port }}/

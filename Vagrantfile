@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ['modifyvm', :id, '--audio', 'none']
   end
 
-  # Define three VMs with static private IP addresses.
+  # Define two VMs with static private IP addresses.
   boxes = [
     { :name => "kube1", :ip => "192.168.7.2" },
     { :name => "kube2", :ip => "192.168.7.3" }

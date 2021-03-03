@@ -5,7 +5,7 @@ metadata:
   name: jdkat
   namespace: default
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: jdkat
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: jdkat
-        image: kcharette/sba-python:v1
+        image: kg0529/flask
         ports:
-        - containerPort: 8090
+        - containerPort: 9090
