@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Cloning git repo') {
             steps {
-                sm 'rm -rf ps-devops-project-jdkat'
+                sh 'rm -rf ps-devops-project-jdkat'
                 sh 'git clone https://github.com/k-charette/ps-devops-project-jdkat'
             }
         }
