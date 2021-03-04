@@ -19,3 +19,6 @@ spec:
         image: kg0529/flask
         ports:
         - containerPort: 9090
+
+
+
